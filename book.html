@@ -42,11 +42,51 @@
   .agent-head h2{font-size:19px;}
   .agent-head .role{font-family:var(--font-mono);font-size:12px;color:var(--slate);margin-top:2px;}
 
-  .point-note{margin-top:6px;display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:10px;padding:18px 20px;}
-  .point-note .arrow{font-size:22px;color:var(--hivis-deep);animation:nudge 1.6s ease-in-out infinite;flex-shrink:0;}
-  @keyframes nudge{0%,100%{transform:translate(0,0);}50%{transform:translate(6px,6px);}}
-  .point-note p{font-size:14.5px;color:var(--ink);}
-  .point-note p b{font-weight:700;}
+  .point-note{margin-top:6px;display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:10px;padding:16px 18px;}
+  .point-note p{font-size:13.5px;color:var(--slate);}
+
+  /* ---------- LIVE WIDGET ---------- */
+  .widget-stage{margin-top:6px;}
+  .mode-picker{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:520px){ .mode-picker{grid-template-columns:1fr;} }
+  .mode-btn{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:20px 18px;text-align:left;cursor:pointer;font-family:var(--font-body);transition:border-color 0.15s;}
+  .mode-btn:hover{border-color:var(--hivis);}
+  .mode-btn .mb-label{font-family:var(--font-display);font-weight:700;font-size:15.5px;margin-bottom:4px;}
+  .mode-btn .mb-sub{font-size:13px;color:var(--slate);}
+
+  .live-panel{border:1px solid var(--line);border-radius:10px;overflow:hidden;display:none;}
+  .live-panel.on{display:block;}
+  .live-header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1.5px dashed var(--line);background:var(--paper);font-family:var(--font-mono);font-size:11.5px;color:var(--slate);}
+  .live-status{display:flex;align-items:center;gap:7px;font-weight:600;}
+  .live-status .pulse{width:7px;height:7px;border-radius:50%;background:var(--slate-light);flex-shrink:0;}
+  .live-status.is-connecting .pulse{background:#E0A83A;animation:pulse 1s infinite;}
+  .live-status.is-listening .pulse{background:#28A048;animation:pulse 1.8s infinite;}
+  .live-status.is-speaking .pulse{background:var(--hivis);animation:pulse 1s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(40,160,72,0.4);}70%{box-shadow:0 0 0 7px rgba(40,160,72,0);}100%{box-shadow:0 0 0 0 rgba(40,160,72,0);}}
+  .end-btn{font-family:var(--font-mono);font-size:11px;font-weight:600;color:#C23B2E;background:none;border:none;cursor:pointer;letter-spacing:0.03em;}
+
+  .transcript{max-height:280px;min-height:120px;overflow-y:auto;padding:6px 18px;}
+  .t-row{display:flex;gap:12px;padding:12px 0;border-top:1px dashed var(--paper-dim);font-size:13.5px;}
+  .t-row:first-child{border-top:none;}
+  .t-row .t-who{font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--slate-light);width:38px;flex-shrink:0;padding-top:2px;text-transform:uppercase;}
+  .t-row.user .t-who{color:var(--steel);}
+  .t-row.ai .t-who{color:var(--hivis-deep);}
+  .t-empty{padding:30px 0;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--slate-light);}
+
+  .voice-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;gap:14px;}
+  .voice-orb{width:72px;height:72px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform 0.15s ease;}
+  .voice-orb.speaking{transform:scale(1.08);box-shadow:0 0 0 8px rgba(255,106,19,0.15);}
+  .voice-orb.listening{box-shadow:0 0 0 8px rgba(40,160,72,0.12);}
+  .voice-orb svg{width:30px;height:30px;}
+  .voice-hint{font-family:var(--font-mono);font-size:12px;color:var(--slate);}
+
+  .text-input-row{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--line);}
+  .text-input-row input{flex:1;border:1px solid var(--line);border-radius:6px;padding:11px 14px;font-family:var(--font-body);font-size:14px;color:var(--ink);}
+  .text-input-row input:focus{outline:none;border-color:var(--ink);}
+  .text-input-row button{background:var(--hivis);color:var(--white);border:none;border-radius:6px;padding:0 18px;font-weight:600;font-size:14px;cursor:pointer;}
+  .text-input-row button:disabled{opacity:0.5;cursor:default;}
+
+  .widget-note{font-family:var(--font-mono);font-size:11px;color:var(--slate-light);margin-top:12px;text-align:center;}
 
   .trust-row{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11.5px;color:var(--slate);}
   .trust-row span::before{content:"·";margin-right:8px;color:var(--hivis-deep);}
@@ -68,8 +108,8 @@
 <main>
   <div class="wrap">
     <div class="kicker">THIS IS THE PRODUCT, NOT A DEMO OF IT</div>
-    <h1>Talk to Ava. She'll book your Trade Audit.</h1>
-    <p class="lead">Ava is the same AI receptionist your customers would talk to — same voice, same job. Right now, her only job is getting you booked in for a free 15-minute audit call.</p>
+    <h1>Talk to Flow. She'll book your Trade Audit.</h1>
+    <p class="lead">Flow is the same AI receptionist your customers would talk to — same voice, same job. Right now, her only job is getting you booked in for a free 15-minute audit call.</p>
 
     <div class="agent-card">
       <div class="agent-head">
@@ -77,14 +117,47 @@
           <svg viewBox="0 0 40 40" fill="none"><path d="M6 32 L6 22 Q6 16 12 16 L24 16 Q30 16 30 10 L30 6" stroke="#FF6A13" stroke-width="5" stroke-linecap="round"/><circle cx="30" cy="4" r="4.5" fill="#FF6A13"/></svg>
         </div>
         <div>
-          <h2>Ava — Flowify's receptionist</h2>
+          <h2>Flow — Flowify's receptionist</h2>
           <div class="role">Answers, triages, books. Never sleeps.</div>
         </div>
       </div>
 
-      <div class="point-note">
-        <span class="arrow">↘</span>
-        <p><b>Look for Ava in the bottom-right corner</b> of your screen — click to start talking or typing.</p>
+      <div class="widget-stage">
+        <div class="mode-picker" id="mode-picker">
+          <button class="mode-btn" id="start-voice" type="button">
+            <div class="mb-label">🎙 Talk to Flow</div>
+            <div class="mb-sub">Closest to what your customers get. Needs mic access.</div>
+          </button>
+          <button class="mode-btn" id="start-text" type="button">
+            <div class="mb-label">💬 Chat with Flow</div>
+            <div class="mb-sub">No mic needed — type back and forth instead.</div>
+          </button>
+        </div>
+
+        <div class="live-panel" id="live-panel">
+          <div class="live-header">
+            <div class="live-status" id="live-status"><span class="pulse"></span><span id="live-status-label">Connecting…</span></div>
+            <button class="end-btn" id="end-btn" type="button">END</button>
+          </div>
+
+          <div class="voice-stage" id="voice-stage" style="display:none;">
+            <div class="voice-orb" id="voice-orb">
+              <svg viewBox="0 0 40 40" fill="none"><path d="M6 32 L6 22 Q6 16 12 16 L24 16 Q30 16 30 10 L30 6" stroke="#FF6A13" stroke-width="5" stroke-linecap="round"/><circle cx="30" cy="4" r="4.5" fill="#FF6A13"/></svg>
+            </div>
+            <div class="voice-hint" id="voice-hint">Listening…</div>
+          </div>
+
+          <div class="transcript" id="transcript">
+            <div class="t-empty" id="t-empty">Flow will say hello in a second…</div>
+          </div>
+
+          <div class="text-input-row" id="text-input-row" style="display:none;">
+            <input type="text" id="text-input" placeholder="Type a message…" autocomplete="off">
+            <button id="text-send" type="button">Send</button>
+          </div>
+        </div>
+
+        <div class="widget-note" id="widget-note">Mic access is requested only when you choose "Talk"</div>
       </div>
 
       <div class="trust-row">
@@ -98,8 +171,135 @@
   </div>
 </main>
 
-<elevenlabs-convai agent-id="agent_3901m2hk5rxvf9hv0atz1jmtbvsm"></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script type="module">
+  import { Conversation } from "https://esm.sh/@elevenlabs/client";
+
+  const AGENT_ID = "agent_3901m2hk5rxvf9hv0atz1jmtbvsm";
+
+  const modePicker = document.getElementById('mode-picker');
+  const livePanel = document.getElementById('live-panel');
+  const liveStatus = document.getElementById('live-status');
+  const liveStatusLabel = document.getElementById('live-status-label');
+  const endBtn = document.getElementById('end-btn');
+  const voiceStage = document.getElementById('voice-stage');
+  const voiceOrb = document.getElementById('voice-orb');
+  const voiceHint = document.getElementById('voice-hint');
+  const transcript = document.getElementById('transcript');
+  const tEmpty = document.getElementById('t-empty');
+  const textInputRow = document.getElementById('text-input-row');
+  const textInput = document.getElementById('text-input');
+  const textSend = document.getElementById('text-send');
+  const widgetNote = document.getElementById('widget-note');
+
+  let conversation = null;
+  let currentMode = null; // 'voice' | 'text'
+
+  function setStatusLabel(text, cls){
+    liveStatusLabel.textContent = text;
+    liveStatus.className = 'live-status' + (cls ? ' ' + cls : '');
+  }
+
+  function addTranscriptRow(who, text){
+    tEmpty.style.display = 'none';
+    const row = document.createElement('div');
+    row.className = 't-row ' + (who === 'user' ? 'user' : 'ai');
+    row.innerHTML = '<div class="t-who">' + (who === 'user' ? 'You' : 'Ava') + '</div><div>' + text + '</div>';
+    transcript.appendChild(row);
+    transcript.scrollTop = transcript.scrollHeight;
+  }
+
+  async function startConversation(mode){
+    currentMode = mode;
+    modePicker.style.display = 'none';
+    livePanel.classList.add('on');
+    voiceStage.style.display = mode === 'voice' ? 'flex' : 'none';
+    textInputRow.style.display = mode === 'text' ? 'flex' : 'none';
+    widgetNote.style.display = 'none';
+    setStatusLabel('Connecting…', 'is-connecting');
+
+    try {
+      if (mode === 'voice') {
+        // Mic permission is requested by the SDK when the session starts;
+        // this call surfaces a clearer error earlier if it's denied.
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+
+      conversation = await Conversation.startSession({
+        agentId: AGENT_ID,
+        overrides: {
+          conversation: { textOnly: mode === 'text' }
+        },
+        onConnect: () => {
+          setStatusLabel(mode === 'voice' ? 'Listening…' : 'Connected', mode === 'voice' ? 'is-listening' : '');
+        },
+        onDisconnect: () => {
+          setStatusLabel('Ended');
+        },
+        onModeChange: ({ mode: agentMode }) => {
+          if (currentMode !== 'voice') return;
+          if (agentMode === 'speaking') {
+            setStatusLabel('Flow is speaking…', 'is-speaking');
+            voiceOrb.classList.add('speaking');
+            voiceOrb.classList.remove('listening');
+            voiceHint.textContent = 'Ava is speaking…';
+          } else {
+            setStatusLabel('Listening…', 'is-listening');
+            voiceOrb.classList.add('listening');
+            voiceOrb.classList.remove('speaking');
+            voiceHint.textContent = 'Listening…';
+          }
+        },
+        onMessage: (message) => {
+          if (!message || !message.message) return;
+          addTranscriptRow(message.source === 'user' ? 'user' : 'ai', message.message);
+        },
+        onError: (msg) => {
+          setStatusLabel('Connection issue');
+          addTranscriptRow('ai', "Sorry — I've hit a connection issue. Try refreshing, or email hello@flowify.nz and we'll book it in by hand.");
+          console.error('ElevenLabs error:', msg);
+        }
+      });
+    } catch (err) {
+      setStatusLabel('Mic access needed');
+      addTranscriptRow('ai', mode === 'voice'
+        ? "I need mic access to talk — check your browser's permission prompt, or try Chat instead."
+        : "Something went wrong starting the chat. Try refreshing the page.");
+      console.error('Failed to start conversation:', err);
+    }
+  }
+
+  async function endConversation(){
+    if (conversation) {
+      try { await conversation.endSession(); } catch (e) { /* already closed */ }
+      conversation = null;
+    }
+    livePanel.classList.remove('on');
+    modePicker.style.display = 'grid';
+    widgetNote.style.display = 'block';
+    transcript.innerHTML = '<div class="t-empty" id="t-empty">Flow will say hello in a second…</div>';
+    voiceOrb.classList.remove('speaking', 'listening');
+    textInput.value = '';
+  }
+
+  document.getElementById('start-voice').addEventListener('click', () => startConversation('voice'));
+  document.getElementById('start-text').addEventListener('click', () => startConversation('text'));
+  endBtn.addEventListener('click', endConversation);
+
+  function sendTextMessage(){
+    const val = textInput.value.trim();
+    if (!val || !conversation) return;
+    // NOTE: adding this row immediately for responsive feel. If ElevenLabs'
+    // onMessage also echoes the user's own sent text back (unconfirmed —
+    // couldn't verify against a live session from here), you'll see it
+    // twice in text mode. If that happens, delete this addTranscriptRow
+    // call and rely on onMessage alone as the single source of truth.
+    addTranscriptRow('user', val);
+    conversation.sendUserMessage(val);
+    textInput.value = '';
+  }
+  textSend.addEventListener('click', sendTextMessage);
+  textInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendTextMessage(); });
+</script>
 
 </body>
 </html>
