@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Free Trade Audit — Flowify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151A22; --paper:#EEF0F1; --paper-dim:#E2E5E8; --white:#FFFFFF;
+    --steel:#3E5C76; --steel-deep:#2B4257; --hivis:#FF6A13; --hivis-deep:#E0590A;
+    --slate:#5B6472; --slate-light:#8A93A1; --line:#CBD1D8; --line-dark:#3A4351;
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-body:'Inter', system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+  h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-0.01em;}
+
+  nav{padding:22px 0;border-bottom:1px solid var(--line-dark);}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--white);}
+  .brand .dot{width:10px;height:10px;background:var(--hivis);border-radius:2px;transform:rotate(45deg);}
+  .back{font-family:var(--font-mono);font-size:12.5px;color:var(--slate-light);}
+  .back:hover{color:var(--white);}
+
+  main{padding:70px 0 90px;color:var(--white);}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.06em;color:#FF8B47;margin-bottom:18px;}
+  h1{font-size:clamp(30px,4.2vw,44px);line-height:1.1;max-width:620px;}
+  main > .wrap > p.lead{font-size:16.5px;color:#C7CDD7;max-width:520px;margin-top:18px;line-height:1.6;}
+
+  .agent-card{background:var(--white);color:var(--ink);border-radius:14px;padding:36px 34px;margin-top:44px;}
+  .agent-head{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .agent-avatar{width:48px;height:48px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .agent-avatar svg{width:24px;height:24px;}
+  .agent-head h2{font-size:19px;}
+  .agent-head .role{font-family:var(--font-mono);font-size:12px;color:var(--slate);margin-top:2px;}
+
+  .widget-stage{margin-top:28px;border-radius:10px;min-height:400px;display:flex;align-items:stretch;justify-content:stretch;}
+  .widget-stage elevenlabs-convai{width:100%;}
+
+  .trust-row{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11.5px;color:var(--slate);}
+  .trust-row span::before{content:"·";margin-right:8px;color:var(--hivis-deep);}
+  .trust-row span:first-child::before{content:"";margin-right:0;}
+
+  .fallback{margin-top:20px;font-size:13.5px;color:var(--slate-light);}
+  .fallback a{color:#FF8B47;text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span>Flowify</a>
+    <a href="index.html" class="back">← Back to site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="kicker">THIS IS THE PRODUCT, NOT A DEMO OF IT</div>
+    <h1>Talk to Ava. She'll book your Trade Audit.</h1>
+    <p class="lead">Ava is the same AI receptionist your customers would talk to — same voice, same job. Right now, her only job is getting you booked in for a free 15-minute audit call.</p>
+
+    <div class="agent-card">
+      <div class="agent-head">
+        <div class="agent-avatar">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M6 32 L6 22 Q6 16 12 16 L24 16 Q30 16 30 10 L30 6" stroke="#FF6A13" stroke-width="5" stroke-linecap="round"/><circle cx="30" cy="4" r="4.5" fill="#FF6A13"/></svg>
+        </div>
+        <div>
+          <h2>Ava — Flowify's receptionist</h2>
+          <div class="role">Answers, triages, books. Never sleeps.</div>
+        </div>
+      </div>
+
+      <div class="widget-stage" id="widget-stage">
+        <elevenlabs-convai agent-id="agent_3901m2hk5rxvf9hv0atz1jmtbvsm"></elevenlabs-convai>
+      </div>
+
+      <div class="trust-row">
+        <span>15 minutes, max</span>
+        <span>No obligation</span>
+        <span>You'll get a calendar invite the moment it's booked</span>
+      </div>
+    </div>
+
+    <p class="fallback">Prefer not to talk to an AI first? <a href="mailto:hello@flowify.nz">Email us directly</a> and we'll book it in by hand.</p>
+  </div>
+</main>
+
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+</body>
+</html>
