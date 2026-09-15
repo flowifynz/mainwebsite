@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowify — The done-for-you agency for NZ trade businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151A22;
+    --paper:#EEF0F1;
+    --paper-dim:#E2E5E8;
+    --white:#FFFFFF;
+    --steel:#3E5C76;
+    --steel-deep:#2B4257;
+    --hivis:#FF6A13;
+    --hivis-deep:#E0590A;
+    --slate:#5B6472;
+    --slate-light:#8A93A1;
+    --line:#CBD1D8;
+    --line-dark:#3A4351;
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-body:'Inter', system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(238,240,241,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none;}
+  .brand .dot{width:11px;height:11px;background:var(--hivis);border-radius:2px;transform:rotate(45deg);flex-shrink:0;}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:500;}
+  .nav-links a{text-decoration:none;color:var(--ink);}
+  .nav-links a:hover{color:var(--hivis-deep);}
+  .nav-cta{background:var(--ink);color:var(--white);padding:10px 18px;border-radius:6px;font-size:13.5px;font-weight:600;text-decoration:none;}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:6px;font-size:15px;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer;text-decoration:none;}
+  .btn-primary{background:var(--hivis);color:var(--white);}
+  .btn-primary:hover{background:var(--hivis-deep);}
+  .btn-ghost-dark{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.35);}
+  .btn-ghost-dark:hover{border-color:rgba(255,255,255,0.7);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-dark);}
+
+  /* ---------- HERO ---------- */
+  .hero{background:var(--ink);color:var(--white);padding:64px 0 0;position:relative;overflow:hidden;border-bottom:4px solid var(--hivis);}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;padding-bottom:64px;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-eyebrow{font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.06em;color:#FF8B47;margin-bottom:22px;}
+  .hero h1{font-size:clamp(34px,4.6vw,54px);line-height:1.06;color:var(--white);max-width:600px;}
+  .hero p.sub{font-size:17px;color:#C7CDD7;max-width:480px;margin-top:22px;line-height:1.6;}
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .hero-note{font-family:var(--font-mono);font-size:12px;color:var(--slate-light);margin-top:16px;}
+
+  /* Hero docket visual */
+  .hero-docket-stack{position:relative;padding:20px 0;}
+  .docket{background:var(--white);border-radius:10px;padding:20px 22px;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,0.35);}
+  .docket .dh{display:flex;justify-content:space-between;border-bottom:1.5px dashed var(--line);padding-bottom:10px;margin-bottom:10px;font-family:var(--font-mono);font-size:11px;color:var(--slate);}
+  .docket .dh .live{display:flex;align-items:center;gap:6px;color:#1E7A3E;font-weight:600;}
+  .docket .dh .live .pulse{width:7px;height:7px;border-radius:50%;background:#28A048;animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(40,160,72,0.45);}70%{box-shadow:0 0 0 7px rgba(40,160,72,0);}100%{box-shadow:0 0 0 0 rgba(40,160,72,0);}}
+  .docket .dr{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;}
+  .docket .dr .k{color:var(--slate);}
+  .docket .dr .v{font-weight:600;}
+  .docket-under{background:var(--steel-deep);height:14px;border-radius:0 0 8px 8px;margin:0 10px;transform:translateY(-6px);}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:88px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-head{max-width:640px;margin-bottom:46px;}
+  .sec-kicker{font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--hivis-deep);margin-bottom:14px;}
+  .sec-head h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;}
+  .sec-head p{color:var(--slate);font-size:16px;margin-top:14px;line-height:1.6;}
+
+  /* ---------- DONE FOR YOU ---------- */
+  .dfy-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  @media (max-width:820px){ .dfy-grid{grid-template-columns:1fr;} }
+  .dfy-list{margin-top:6px;}
+  .dfy-item{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--line);}
+  .dfy-item:first-child{border-top:none;padding-top:0;}
+  .dfy-item .mk{width:22px;height:22px;border-radius:5px;background:var(--hivis);flex-shrink:0;margin-top:3px;}
+  .dfy-item h4{font-size:16px;margin-bottom:5px;}
+  .dfy-item p{font-size:14.5px;color:var(--slate);}
+  .not-us-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:30px 28px;}
+  .not-us-card .nc-label{font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.05em;color:var(--slate-light);margin-bottom:16px;}
+  .not-us-row{display:flex;gap:12px;padding:12px 0;border-top:1px dashed var(--line);font-size:14.5px;}
+  .not-us-row:first-of-type{border-top:none;}
+  .not-us-row .no{color:#C23B2E;font-weight:700;flex-shrink:0;}
+
+  /* ---------- CHOOSER ---------- */
+  .chooser-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:820px){ .chooser-grid{grid-template-columns:1fr;} }
+  .path-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:36px 32px;display:flex;flex-direction:column;}
+  .path-card.featured{border:2px solid var(--ink);}
+  .path-tag{font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.05em;color:var(--hivis-deep);background:#FFF0E5;padding:5px 10px;border-radius:20px;display:inline-block;margin-bottom:18px;width:fit-content;}
+  .path-card h3{font-size:23px;margin-bottom:10px;}
+  .path-fit{font-size:14px;color:var(--slate);margin-bottom:22px;line-height:1.55;}
+  .path-includes{list-style:none;margin-bottom:26px;flex-grow:1;}
+  .path-includes li{font-size:14px;padding:8px 0;border-top:1px solid var(--paper-dim);display:flex;gap:10px;}
+  .path-includes li:first-child{border-top:none;}
+  .path-includes li::before{content:"";width:5px;height:5px;background:var(--hivis);border-radius:1px;flex-shrink:0;margin-top:7px;transform:rotate(45deg);}
+  .path-from{font-family:var(--font-mono);font-size:12.5px;color:var(--slate);margin-bottom:18px;}
+  .path-from b{color:var(--ink);font-size:15px;}
+
+  /* ---------- PROCESS (real sequence — numbering justified) ---------- */
+  .process-list{margin-top:10px;}
+  .process-item{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--line);}
+  .process-item:first-child{border-top:none;padding-top:0;}
+  .process-num{font-family:var(--font-mono);font-size:14px;color:var(--hivis-deep);font-weight:600;padding-top:2px;}
+  .process-item h4{font-size:17px;margin-bottom:6px;}
+  .process-item p{font-size:14.5px;color:var(--slate);max-width:520px;}
+
+  /* ---------- PROOF STRIP ---------- */
+  .proof-band{background:var(--steel-deep);color:var(--white);}
+  .proof-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:center;}
+  @media (max-width:820px){ .proof-grid{grid-template-columns:1fr;} }
+  .proof-band .sec-kicker{color:#FF8B47;}
+  .proof-band h2{color:var(--white);}
+  .proof-band p{color:#C7CDD7;}
+  .timeline{margin-top:30px;font-family:var(--font-mono);font-size:13px;}
+  .tl-row{display:flex;gap:16px;padding:10px 0;border-top:1px dashed rgba(255,255,255,0.18);color:#C7CDD7;}
+  .tl-row:first-child{border-top:none;}
+  .tl-row .t{color:#FF8B47;width:60px;flex-shrink:0;}
+
+  /* ---------- FAQ ---------- */
+  details{border-top:1px solid var(--line);padding:20px 0;}
+  details:first-of-type{border-top:none;}
+  summary{cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  summary::-webkit-details-marker{display:none;}
+  summary .plus{font-family:var(--font-mono);color:var(--hivis-deep);font-size:18px;flex-shrink:0;margin-left:20px;transition:transform 0.2s;}
+  details[open] summary .plus{transform:rotate(45deg);}
+  details p{font-size:14.5px;color:var(--slate);margin-top:14px;max-width:640px;line-height:1.6;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{background:var(--ink);color:var(--white);text-align:left;border-bottom:none;}
+  .final-cta-inner{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;}
+  .final-cta h2{color:var(--white);font-size:clamp(26px,3.6vw,38px);max-width:520px;}
+  .final-cta p{color:#C7CDD7;margin-top:12px;max-width:440px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);border-top:1px solid var(--line-dark);padding:36px 0;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-brand{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--white);}
+  .footer-brand .dot{width:9px;height:9px;background:var(--hivis);border-radius:2px;transform:rotate(45deg);}
+  footer .fine{font-family:var(--font-mono);font-size:11.5px;color:var(--slate-light);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="brand"><span class="dot"></span>Flowify</a>
+    <div class="nav-links">
+      <a href="#done-for-you">How it works</a>
+      <a href="#paths">Choose your path</a>
+      <a href="#process">Onboarding</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="book.html" class="nav-cta">Book Your Free Trade Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow">DONE-FOR-YOU TECH, RUN BY US — NOT YOU</div>
+      <h1>We run the software so you don't have to.</h1>
+      <p class="sub">Flowify sets up, connects, and manages your job scheduling, your accounts, and a receptionist that never misses a call — 24/7. You never log in. You just get the jobs.</p>
+      <div class="hero-ctas">
+        <a href="book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+        <a href="#paths" class="btn btn-ghost-dark">See how it works</a>
+      </div>
+      <div class="hero-note">15-minute call · no obligation · we tell you straight if it's not a fit</div>
+    </div>
+    <div class="hero-docket-stack">
+      <div class="docket">
+        <div class="dh"><span>JOB #FL-2291</span><span class="live"><span class="pulse"></span>ANSWERED 7:42PM</span></div>
+        <div class="dr"><span class="k">Caller</span><span class="v">S. Ngata</span></div>
+        <div class="dr"><span class="k">Job</span><span class="v">Hot water cylinder leak</span></div>
+        <div class="dr"><span class="k">Site</span><span class="v">Te Atatū South</span></div>
+        <div class="dr"><span class="k">Urgency</span><span class="v">Emergency</span></div>
+      </div>
+      <div class="docket-under"></div>
+    </div>
+  </div>
+</header>
+
+<!-- DONE FOR YOU -->
+<section id="done-for-you">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">WHAT "DONE FOR YOU" ACTUALLY MEANS</div>
+      <h2>You don't touch the tech. Ever.</h2>
+      <p>Most software gets sold to tradies and then left for them to figure out. We do the opposite: we pick the system, build it around your business, and run it every week after that. If something breaks, that's our alert to fix, not yours to notice.</p>
+    </div>
+    <div class="dfy-grid">
+      <div class="dfy-list">
+        <div class="dfy-item">
+          <div class="mk"></div>
+          <div><h4>We set it up.</h4><p>Job scheduling, invoicing, and a 24/7 AI receptionist — configured around how your business actually runs, not a generic template.</p></div>
+        </div>
+        <div class="dfy-item">
+          <div class="mk"></div>
+          <div><h4>We connect it.</h4><p>Calls become job tickets. Jobs sync to your accounts. Customers get a text confirmation. No manual re-entry, anywhere in the chain.</p></div>
+        </div>
+        <div class="dfy-item">
+          <div class="mk"></div>
+          <div><h4>We watch it.</h4><p>Every automation is monitored. If a call ever fails to log a job, we know before you do — and we fix it the same day.</p></div>
+        </div>
+        <div class="dfy-item">
+          <div class="mk"></div>
+          <div><h4>We're on the other end of the phone.</h4><p>Ongoing support is a person, not a help centre. Something looks off — you message us, we handle it.</p></div>
+        </div>
+      </div>
+      <div class="not-us-card">
+        <div class="nc-label">WHAT WE'RE NOT</div>
+        <div class="not-us-row"><span class="no">✕</span><span>A piece of software you have to learn.</span></div>
+        <div class="not-us-row"><span class="no">✕</span><span>A call centre reading a script off a screen.</span></div>
+        <div class="not-us-row"><span class="no">✕</span><span>An admin service typing things out by hand.</span></div>
+        <div class="not-us-row"><span class="no">✕</span><span>A generic consultant who hands you a plan and leaves.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATH CHOOSER -->
+<section id="paths">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">TWO WAYS WE DO IT FOR YOU</div>
+      <h2>Pick the one that matches how you run jobs today.</h2>
+      <p>Not sure which? Say so on the call — figuring that out is part of the free audit, not something you need to work out yourself first.</p>
+    </div>
+    <div class="chooser-grid">
+      <div class="path-card featured">
+        <span class="path-tag">FULL JOB MANAGEMENT</span>
+        <h3>Flowify Core</h3>
+        <p class="path-fit">For businesses with 4+ staff juggling multiple jobs, quotes, and techs at once — you need real scheduling and dispatch, not a notebook.</p>
+        <ul class="path-includes">
+          <li>Job scheduling, quoting & invoicing, fully set up and managed</li>
+          <li>Accounts synced automatically — no double entry</li>
+          <li>24/7 AI receptionist logs every call as a job, ready to action</li>
+          <li>Text confirmations sent automatically to every customer</li>
+        </ul>
+        <div class="path-from">FROM <b>$2,990 + GST</b> SETUP · $990/MO MANAGED</div>
+        <a href="book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+      </div>
+      <div class="path-card">
+        <span class="path-tag">SOLO &amp; MICRO OPERATORS</span>
+        <h3>Flowify Signal</h3>
+        <p class="path-fit">For solo operators and small crews doing one job at a time — mowing rounds, handyman callouts, small landscaping jobs. Your problem is missed calls, not dispatch.</p>
+        <ul class="path-includes">
+          <li>A simple pipeline: new lead → quote → scheduled → paid</li>
+          <li>24/7 AI receptionist answers, texts back, books the job in</li>
+          <li>Missed-call follow-up handled automatically, day or night</li>
+          <li>No software to learn — we run the whole thing</li>
+        </ul>
+        <div class="path-from">FROM <b>$2,190 + GST</b> SETUP · $790/MO MANAGED</div>
+        <a href="book.html" class="btn btn-ghost">Book Your Free Trade Audit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF / PROCESS -->
+<section class="proof-band" id="process">
+  <div class="wrap proof-grid">
+    <div>
+      <div class="sec-kicker">FROM FIRST CALL TO LIVE</div>
+      <h2>Two weeks, start to finish.</h2>
+      <p>You're not left to configure anything mid-way through. Every step is run by us, on a fixed schedule, with a person checking it before it goes live.</p>
+      <div class="process-list" style="margin-top:36px;">
+        <div class="process-item" style="border-top-color:rgba(255,255,255,0.18);">
+          <div class="process-num">01</div>
+          <div><h4 style="color:var(--white);">Discovery call</h4><p style="color:#C7CDD7;">A 90-minute audit of how jobs currently move through your business — no tech jargon, just how you work.</p></div>
+        </div>
+        <div class="process-item" style="border-top-color:rgba(255,255,255,0.18);">
+          <div class="process-num">02</div>
+          <div><h4 style="color:var(--white);">We build it</h4><p style="color:#C7CDD7;">Your system, your receptionist script, and your integrations — built and tested against real scenarios from your business.</p></div>
+        </div>
+        <div class="process-item" style="border-top-color:rgba(255,255,255,0.18);">
+          <div class="process-num">03</div>
+          <div><h4 style="color:var(--white);">We train your team</h4><p style="color:#C7CDD7;">A short session for office and field staff, plus a video walkthrough to keep for reference.</p></div>
+        </div>
+        <div class="process-item" style="border-top-color:rgba(255,255,255,0.18);">
+          <div class="process-num">04</div>
+          <div><h4 style="color:var(--white);">Go live</h4><p style="color:#C7CDD7;">We're on priority support through cutover, watching every call and job as it comes through.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="docket" style="background:var(--white);">
+      <div class="dh"><span>ONBOARDING — FL-CORE-014</span><span class="live"><span class="pulse"></span>ON TRACK</span></div>
+      <div class="timeline" style="color:var(--ink);margin-top:0;font-size:13px;">
+        <div class="tl-row" style="border-top-color:var(--line);color:var(--slate);"><span class="t" style="color:var(--hivis-deep);">DAY 1</span>Audit &amp; discovery call</div>
+        <div class="tl-row" style="border-top-color:var(--line);color:var(--slate);"><span class="t" style="color:var(--hivis-deep);">DAY 2–5</span>System build &amp; integration</div>
+        <div class="tl-row" style="border-top-color:var(--line);color:var(--slate);"><span class="t" style="color:var(--hivis-deep);">DAY 6–9</span>Data migration &amp; testing</div>
+        <div class="tl-row" style="border-top-color:var(--line);color:var(--slate);"><span class="t" style="color:var(--hivis-deep);">DAY 10–12</span>Team training</div>
+        <div class="tl-row" style="border-top-color:var(--line);color:var(--slate);"><span class="t" style="color:var(--hivis-deep);">DAY 13–14</span>Cutover, live support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">QUESTIONS TRADIES ACTUALLY ASK</div>
+      <h2>Straight answers, before you book.</h2>
+    </div>
+    <div style="max-width:720px;">
+      <details open>
+        <summary>Do I have to learn new software?<span class="plus">+</span></summary>
+        <p>No. We build it, connect it, and run it. If you ever want to look at your job board or your numbers, you can — but nothing about your day-to-day requires you to touch the backend.</p>
+      </details>
+      <details>
+        <summary>What happens if the AI receptionist gets something wrong?<span class="plus">+</span></summary>
+        <p>Every call is monitored, and you can review any conversation. If something's off — a wrong detail, a missed nuance — we adjust the script within days, not weeks.</p>
+      </details>
+      <details>
+        <summary>Is this locked into a long contract?<span class="plus">+</span></summary>
+        <p>Setup is a one-off fee; the monthly plan runs month-to-month. We'd rather earn the retainer every month than trap you in a contract you want out of.</p>
+      </details>
+      <details>
+        <summary>Do I need Jobber or Xero already?<span class="plus">+</span></summary>
+        <p>No — if you're on Flowify Core or Pro &amp; Scale, we set those up as part of the build. If you're on Flowify Signal, you don't need them at all.</p>
+      </details>
+      <details>
+        <summary>What if I outgrow Signal and need full dispatch later?<span class="plus">+</span></summary>
+        <p>We move you up to Core when the job calls for it — same receptionist, same number, same customer history, just a bigger system underneath.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="book">
+  <div class="wrap final-cta-inner">
+    <div>
+      <h2>Stop losing jobs to voicemail.</h2>
+      <p>Book a free 15-minute Trade Audit. We'll tell you exactly what's slipping through the cracks — and whether Flowify is the right fix.</p>
+    </div>
+    <a href="book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand"><span class="dot"></span>Flowify</div>
+    <div class="fine">FLOWIFY NZ — AUCKLAND — DONE-FOR-YOU JOB MANAGEMENT &amp; AI INTAKE FOR NZ TRADES</div>
+  </div>
+</footer>
+
+</body>
+</html>
