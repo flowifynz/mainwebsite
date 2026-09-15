@@ -229,11 +229,30 @@
         overrides: {
           conversation: { textOnly: mode === 'text' }
         },
+        // Flow calls this itself once it's said goodbye — see the
+        // "end_call" client tool note in the agent spec. This is what lets
+        // the session close the moment the booking's actually done,
+        // instead of sitting connected (and billing) until the 180s
+        // dashboard timeout kicks in.
+        clientTools: {
+          end_call: async () => {
+            // Small delay so the agent's final spoken/typed line has time
+            // to finish playing/rendering before the connection drops.
+            setTimeout(() => {
+              if (conversation) conversation.endSession();
+            }, 1500);
+            return "Call ending now.";
+          }
+        },
         onConnect: () => {
           setStatusLabel(mode === 'voice' ? 'Listening…' : 'Connected', mode === 'voice' ? 'is-listening' : '');
         },
         onDisconnect: () => {
-          setStatusLabel('Ended');
+          setStatusLabel('Call ended');
+          conversation = null;
+          // Give people a beat to see "Call ended" before the panel resets
+          // back to the picker, rather than snapping shut instantly.
+          setTimeout(resetPanel, 2500);
         },
         onModeChange: ({ mode: agentMode }) => {
           if (currentMode !== 'voice') return;
@@ -268,17 +287,25 @@
     }
   }
 
-  async function endConversation(){
-    if (conversation) {
-      try { await conversation.endSession(); } catch (e) { /* already closed */ }
-      conversation = null;
-    }
+  // UI-only reset — used both after a manual END click and after Flow
+  // ends the call itself via the end_call client tool (through onDisconnect).
+  function resetPanel(){
     livePanel.classList.remove('on');
     modePicker.style.display = 'grid';
     widgetNote.style.display = 'block';
     transcript.innerHTML = '<div class="t-empty" id="t-empty">Flow will say hello in a second…</div>';
     voiceOrb.classList.remove('speaking', 'listening');
     textInput.value = '';
+  }
+
+  // Manual END button — actually closes the connection; UI reset happens
+  // via onDisconnect above so there's one single reset path either way.
+  async function endConversation(){
+    if (conversation) {
+      try { await conversation.endSession(); } catch (e) { /* already closed */ }
+    } else {
+      resetPanel();
+    }
   }
 
   document.getElementById('start-voice').addEventListener('click', () => startConversation('voice'));
