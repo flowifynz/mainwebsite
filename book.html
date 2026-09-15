@@ -113,7 +113,7 @@
 
     <div class="agent-card">
       <div class="agent-head">
-        <div class="agent-avatar">
+        <div class="agent-tar">
           <svg viewBox="0 0 40 40" fill="none"><path d="M6 32 L6 22 Q6 16 12 16 L24 16 Q30 16 30 10 L30 6" stroke="#FF6A13" stroke-width="5" stroke-linecap="round"/><circle cx="30" cy="4" r="4.5" fill="#FF6A13"/></svg>
         </div>
         <div>
@@ -203,7 +203,7 @@
     tEmpty.style.display = 'none';
     const row = document.createElement('div');
     row.className = 't-row ' + (who === 'user' ? 'user' : 'ai');
-    row.innerHTML = '<div class="t-who">' + (who === 'user' ? 'You' : 'Ava') + '</div><div>' + text + '</div>';
+    row.innerHTML = '<div class="t-who">' + (who === 'user' ? 'You' : 'Flow') + '</div><div>' + text + '</div>';
     transcript.appendChild(row);
     transcript.scrollTop = transcript.scrollHeight;
   }
@@ -241,7 +241,7 @@
             setStatusLabel('Flow is speaking…', 'is-speaking');
             voiceOrb.classList.add('speaking');
             voiceOrb.classList.remove('listening');
-            voiceHint.textContent = 'Ava is speaking…';
+            voiceHint.textContent = 'Flow is speaking…';
           } else {
             setStatusLabel('Listening…', 'is-listening');
             voiceOrb.classList.add('listening');
