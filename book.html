@@ -42,8 +42,11 @@
   .agent-head h2{font-size:19px;}
   .agent-head .role{font-family:var(--font-mono);font-size:12px;color:var(--slate);margin-top:2px;}
 
-  .widget-stage{margin-top:28px;border-radius:10px;min-height:400px;display:flex;align-items:stretch;justify-content:stretch;}
-  .widget-stage elevenlabs-convai{width:100%;}
+  .point-note{margin-top:6px;display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:10px;padding:18px 20px;}
+  .point-note .arrow{font-size:22px;color:var(--hivis-deep);animation:nudge 1.6s ease-in-out infinite;flex-shrink:0;}
+  @keyframes nudge{0%,100%{transform:translate(0,0);}50%{transform:translate(6px,6px);}}
+  .point-note p{font-size:14.5px;color:var(--ink);}
+  .point-note p b{font-weight:700;}
 
   .trust-row{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11.5px;color:var(--slate);}
   .trust-row span::before{content:"·";margin-right:8px;color:var(--hivis-deep);}
@@ -79,8 +82,9 @@
         </div>
       </div>
 
-      <div class="widget-stage" id="widget-stage">
-        <elevenlabs-convai agent-id="agent_3901m2hk5rxvf9hv0atz1jmtbvsm"></elevenlabs-convai>
+      <div class="point-note">
+        <span class="arrow">↘</span>
+        <p><b>Look for Ava in the bottom-right corner</b> of your screen — click to start talking or typing.</p>
       </div>
 
       <div class="trust-row">
@@ -94,6 +98,7 @@
   </div>
 </main>
 
+<elevenlabs-convai agent-id="agent_3901m2hk5rxvf9hv0atz1jmtbvsm"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 </body>
