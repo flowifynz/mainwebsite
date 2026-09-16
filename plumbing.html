@@ -235,6 +235,11 @@
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--ink);border-top:1px solid var(--line-dark);padding:36px 0;}
+  .footer-links-row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid var(--line-dark);}
+  .footer-col .fc-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--slate-light);margin-bottom:12px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .footer-col ul a{font-size:13.5px;color:#C7CDD7;text-decoration:none;}
+  .footer-col ul a:hover{color:var(--white);}
   .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
   .footer-brand{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--white);}
   .footer-brand .logo-img{height:20px;width:auto;display:block;}
@@ -442,9 +447,29 @@
 </section>
 
 <footer>
-  <div class="wrap footer-inner">
-    <div class="footer-brand"><img src="https://www.flowify.nz/flowifylogodark.png" alt="Flowify" class="logo-img"></div>
-    <div class="fine">FLOWIFY NZ — AUCKLAND — DONE-FOR-YOU JOB MANAGEMENT &amp; AI INTAKE FOR NZ TRADES</div>
+  <div class="wrap">
+    <div class="footer-links-row">
+      <div class="footer-col">
+        <div class="fc-label">BY TRADE</div>
+        <ul>
+          <li><a href="plumbing.html">Plumbing</a></li>
+          <li><a href="electrical.html">Electrical</a></li>
+          <li><a href="landscaping.html">Landscaping &amp; Lawn Care</a></li>
+          <li><a href="home-services.html">Home Services (Solo &amp; Micro)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="fc-label">GET STARTED</div>
+        <ul>
+          <li><a href="#paths">Choose your path</a></li>
+          <li><a href="book.html">Book Your Free Trade Audit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-brand"><img src="https://www.flowify.nz/flowifylogodark.png" alt="Flowify" class="logo-img"></div>
+      <div class="fine">FLOWIFY NZ — AUCKLAND — DONE-FOR-YOU JOB MANAGEMENT &amp; AI INTAKE FOR NZ TRADES</div>
+    </div>
   </div>
 </footer>
 
