@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Receptionist for NZ Trade Businesses | Flowify</title>
+<meta name="description" content="Flowify's AI receptionist answers every call for NZ plumbers, electricians, and trade businesses — 24/7, logged straight into your job system. Book a free trade audit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151A22; --paper:#EEF0F1; --paper-dim:#E2E5E8; --white:#FFFFFF;
+    --steel:#3E5C76; --steel-deep:#2B4257; --hivis:#FF6A13; --hivis-deep:#E0590A;
+    --slate:#5B6472; --slate-light:#8A93A1; --line:#CBD1D8; --line-dark:#3A4351;
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-body:'Inter', system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--hivis-deep);}
+  .eyebrow.on-dark{color:#FF8B47;}
+  section{padding:64px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-alt{background:var(--paper-dim);}
+
+  /* PROOF BAND (dark, matches index.html's proof-band treatment) */
+  .proof-band{background:var(--steel-deep);color:#FFFFFF;border-bottom:none;}
+  .proof-band .eyebrow{color:#FF8B47;}
+  .proof-band h2{color:#FFFFFF;}
+
+  .meta-note{background:#3A2A16;color:#FFC793;font-family:var(--font-mono);font-size:12px;padding:16px 0;line-height:1.7;}
+  .meta-note .wrap b{color:#FFFFFF;}
+  .meta-note .tag{display:inline-block;background:var(--hivis);color:#151A22;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;letter-spacing:0.04em;}
+
+  /* HEADER (matches live site nav) */
+  .site-header{background:var(--ink);border-bottom:1px solid #2A303C;padding:18px 0;}
+  .site-header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .site-header .logo{height:26px;}
+  .site-header nav{display:flex;gap:26px;font-size:13.5px;color:#C7CDD7;}
+  .site-header nav a{text-decoration:none;}
+  @media (max-width:760px){ .site-header nav{display:none;} }
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:6px;font-size:13.5px;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer;text-decoration:none;}
+  .btn-primary{background:var(--hivis);color:#FFFFFF;}
+  .btn-ghost-dark{background:transparent;color:#FFFFFF;border:1px solid #3A4351;}
+
+  /* HERO */
+  .hero{background:var(--ink);color:var(--white);padding:70px 0 60px;border-bottom:4px solid var(--hivis);}
+  .hero h1{font-size:clamp(30px,5vw,48px);line-height:1.08;color:#FFFFFF;max-width:680px;margin-top:14px;}
+  .hero .sub{font-size:17px;color:#C7CDD7;max-width:540px;margin-top:20px;}
+  .hero .cta-row{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;align-items:center;}
+  .hero .cta-row .btn-primary{padding:14px 24px;font-size:14.5px;}
+  .hero .cta-row .btn-ghost-dark{padding:14px 24px;font-size:14.5px;}
+  .hero .micro{font-family:var(--font-mono);font-size:11.5px;color:var(--slate-light);margin-top:16px;}
+
+  /* PROBLEM STRIP */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:700px){ .stat-row{grid-template-columns:1fr;} }
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px 24px;}
+  .stat-card .n{font-family:var(--font-display);font-weight:700;font-size:28px;color:var(--hivis-deep);}
+  .stat-card .l{font-size:13.5px;color:var(--slate);margin-top:6px;}
+
+  /* HOW IT WORKS */
+  .flow-row{display:flex;gap:0;align-items:stretch;}
+  @media (max-width:800px){ .flow-row{flex-direction:column;gap:16px;} }
+  .flow-step{flex:1;background:var(--white);border:1px solid var(--line);border-radius:10px;padding:24px 22px;}
+  .flow-step + .flow-step{margin-left:16px;}
+  @media (max-width:800px){ .flow-step + .flow-step{margin-left:0;} }
+  .flow-step .num{font-family:var(--font-mono);font-size:12px;color:var(--hivis-deep);margin-bottom:10px;}
+  .flow-step h4{font-size:15.5px;margin-bottom:8px;}
+  .flow-step p{font-size:13.5px;color:var(--slate);}
+
+  /* TWO PATHS (matches live site framing) */
+  .path-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:760px){ .path-grid{grid-template-columns:1fr;} }
+  .path-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:32px 28px;}
+  .path-card .tag-chip{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:0.06em;color:var(--hivis-deep);background:#FFF0E5;padding:3px 8px;border-radius:20px;display:inline-block;margin-bottom:14px;}
+  .path-card h3{font-size:19px;margin-bottom:8px;}
+  .path-card p.desc{font-size:13.5px;color:var(--slate);margin-bottom:16px;}
+  .path-card ul{list-style:none;margin-bottom:18px;}
+  .path-card li{font-size:13.5px;color:var(--ink);padding:6px 0;padding-left:18px;position:relative;}
+  .path-card li:before{content:"—";position:absolute;left:0;color:var(--hivis-deep);}
+  .path-card .btn-outline{display:inline-block;padding:10px 18px;border:1px solid var(--line-dark);border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ink);}
+
+  /* TRADE LINKS */
+  .trade-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+  .trade-link{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:9px 16px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ink);}
+
+  /* DOCKET PROOF */
+  .docket-mini{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:22px 24px;max-width:380px;color:var(--ink);}
+  .docket-mini .dh{display:flex;justify-content:space-between;border-bottom:1.5px dashed var(--line);padding-bottom:10px;margin-bottom:10px;font-family:var(--font-mono);font-size:11px;color:var(--slate);}
+  .docket-mini .dr{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;}
+  .docket-mini .dr .k{color:var(--slate);}
+  .docket-mini .dr .v{font-weight:600;}
+  .status-chip{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:0.06em;background:#E9F6EC;color:#1E7A3E;padding:3px 8px;border-radius:20px;}
+
+  /* FAQ */
+  .faq-item{padding:20px 0;border-top:1px solid var(--line);}
+  .faq-item:first-child{border-top:none;}
+  .faq-item h4{font-size:15px;margin-bottom:8px;}
+  .faq-item h4 .plus{color:var(--hivis-deep);margin-left:4px;}
+  .faq-item p{font-size:14px;color:var(--slate);max-width:640px;}
+
+  /* FINAL CTA */
+  .final-cta{background:var(--ink);color:#FFFFFF;text-align:center;padding:60px 0;}
+  .final-cta h2{color:#FFFFFF;font-size:clamp(22px,3.5vw,30px);max-width:600px;margin:0 auto 14px;}
+  .final-cta p{color:#C7CDD7;font-size:15px;max-width:480px;margin:0 auto 26px;}
+
+  /* FOOTER (matches live site) */
+  footer{background:var(--ink);color:var(--slate-light);padding:36px 0 24px;font-size:13px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:24px;}
+  .footer-col .eyebrow{display:block;margin-bottom:10px;}
+  .footer-col a{display:block;color:#C7CDD7;text-decoration:none;padding:4px 0;font-size:13px;}
+  .footer-logo{height:20px;margin-bottom:16px;}
+  .footer-bottom{font-family:var(--font-mono);font-size:11px;color:var(--slate-light);border-top:1px solid #2A303C;padding-top:18px;letter-spacing:0.03em;}
+</style>
+</head>
+<body>
+
+<div class="meta-note">
+  <div class="wrap">
+    <span class="tag">EDIT BEFORE PUBLISH</span>this bar is a note for you, not page content — remove this div, then set the real filename to <b>ai-receptionist.html</b> alongside your other trade pages on Render.
+  </div>
+</div>
+
+<div class="site-header">
+  <div class="wrap">
+    <a href="https://flowify.nz/"><img class="logo" src="https://www.flowify.nz/flowifylogodark.png" alt="Flowify"></a>
+    <nav>
+      <a href="https://flowify.nz/#done-for-you">How it works</a>
+      <a href="https://flowify.nz/#paths">Choose your path</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="https://flowify.nz/book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow on-dark">AI Receptionist for NZ Trades</span>
+    <h1>The phone gets answered. Even when you're up a ladder.</h1>
+    <p class="sub">Flowify sets up and runs an AI receptionist that answers every call, logs the job, and gets it straight into your schedule — 24/7, no admin on your end.</p>
+    <div class="cta-row">
+      <a href="https://flowify.nz/book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+      <a href="#how" class="btn btn-ghost-dark">See how it works</a>
+    </div>
+    <div class="micro">15-minute call · no obligation · we tell you straight if it's not a fit</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">The problem</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:28px;">Every missed call is a job someone else wins.</h2>
+    <div class="stat-row">
+      <div class="stat-card"><div class="n">2–5</div><div class="l">Jobs a week most tradies lose to voicemail alone</div></div>
+      <div class="stat-card"><div class="n">24/7</div><div class="l">When customers actually call — not just business hours</div></div>
+      <div class="stat-card"><div class="n">0</div><div class="l">Calls that go unanswered once Flowify's set up</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="sec-alt">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:28px;">Three steps, no admin for you.</h2>
+    <div class="flow-row">
+      <div class="flow-step">
+        <div class="num">01</div>
+        <h4>Call comes in</h4>
+        <p>Your AI receptionist answers in a natural NZ accent, every time — no voicemail, no "please hold."</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">02</div>
+        <h4>Job details captured</h4>
+        <p>Name, callback number, site address, what the job is, how urgent it is. No exact pricing given over the phone — genuine emergencies get flagged straight away.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">03</div>
+        <h4>Logged and confirmed</h4>
+        <p>The job lands straight in your job system, and the caller gets an instant text confirming you've got it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO PATHS -->
+<section id="paths-local">
+  <div class="wrap">
+    <span class="eyebrow">Same receptionist, two ways to run it</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:28px;">Pick the one that matches how you run jobs today.</h2>
+    <div class="path-grid">
+      <div class="path-card">
+        <span class="tag-chip">FULL JOB MANAGEMENT</span>
+        <h3>Flowify Core</h3>
+        <p class="desc">For businesses with 4+ staff juggling multiple jobs, quotes, and techs at once.</p>
+        <ul>
+          <li>Job scheduling, quoting &amp; invoicing, fully set up and managed</li>
+          <li>24/7 AI receptionist logs every call as a job, ready to action</li>
+          <li>Accounts synced automatically — no double entry</li>
+        </ul>
+        <a href="https://flowify.nz/book.html" class="btn-outline">Book Your Free Trade Audit</a>
+      </div>
+      <div class="path-card">
+        <span class="tag-chip">SOLO &amp; MICRO OPERATORS</span>
+        <h3>Flowify Signal</h3>
+        <p class="desc">For solo operators and small crews doing one job at a time — your problem is missed calls, not dispatch.</p>
+        <ul>
+          <li>A simple pipeline: new lead → quote → scheduled → paid</li>
+          <li>24/7 AI receptionist answers, texts back, books the job in</li>
+          <li>No software to learn — we run the whole thing</li>
+        </ul>
+        <a href="https://flowify.nz/book.html" class="btn-outline">Book Your Free Trade Audit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADE LINKS -->
+<section class="sec-alt">
+  <div class="wrap">
+    <span class="eyebrow">Built for your trade</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:20px;">See how it works for your line of work.</h2>
+    <div class="trade-links">
+      <a href="https://flowify.nz/plumbing.html" class="trade-link">Plumbing</a>
+      <a href="https://flowify.nz/electrical.html" class="trade-link">Electrical</a>
+      <a href="https://flowify.nz/landscaping.html" class="trade-link">Landscaping &amp; Lawn Care</a>
+      <a href="https://flowify.nz/home-services.html" class="trade-link">Home Services (Solo &amp; Micro)</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof-band">
+  <div class="wrap">
+    <span class="eyebrow">What it looks like</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:12px;">A real job, logged in real time.</h2>
+    <p style="color:#C7CDD7;font-size:15px;max-width:480px;margin-bottom:28px;">Every call becomes a job ticket the moment it lands — no re-typing, no missed details.</p>
+    <div class="docket-mini">
+      <div class="dh"><span>JOB #FL-2291</span><span class="status-chip">● LOGGED</span></div>
+      <div class="dr"><span class="k">Caller</span><span class="v">S. Ngata</span></div>
+      <div class="dr"><span class="k">Job</span><span class="v">Hot water cylinder leak</span></div>
+      <div class="dr"><span class="k">Site</span><span class="v">Te Atatū South</span></div>
+      <div class="dr"><span class="k">Urgency</span><span class="v">Emergency</span></div>
+      <div class="dr"><span class="k">Answered</span><span class="v">7:42PM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow">Fair questions</span>
+    <h2 style="font-size:clamp(22px,3vw,28px);margin-top:10px;margin-bottom:28px;">What tradies actually ask us</h2>
+    <div class="faq-item">
+      <h4>How much is an AI receptionist worth to a trade business?<span class="plus">+</span></h4>
+      <p>Most tradies we talk to lose two to five jobs a week to missed calls alone. At an average job value, that's usually the setup cost recovered inside the first month.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is an AI receptionist actually worth it, or just another subscription?<span class="plus">+</span></h4>
+      <p>It's worth it if missed calls are costing you jobs — which, for most trade businesses we've worked with, they are. It's not worth it if you already answer every call yourself and never miss one.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How does the AI receptionist actually work?<span class="plus">+</span></h4>
+      <p>It answers your calls in a natural NZ accent, asks the same questions a good office manager would, then logs the job straight into your system and texts the caller a confirmation. No app for your customers, no change to your phone number.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can AI really replace a receptionist for a trade business?<span class="plus">+</span></h4>
+      <p>Not entirely — it doesn't build relationships with your regulars the way a person can. What it does is make sure nobody hits voicemail, at any hour, which is where most tradies actually lose the job.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="wrap">
+    <h2>Never miss another job.</h2>
+    <p>Book a free 15-minute Trade Audit. We'll tell you exactly what's slipping through the cracks.</p>
+    <a href="https://flowify.nz/book.html" class="btn btn-primary">Book Your Free Trade Audit</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://www.flowify.nz/flowifylogodark.png" alt="Flowify">
+      </div>
+      <div class="footer-col">
+        <span class="eyebrow on-dark">By trade</span>
+        <a href="https://flowify.nz/plumbing.html">Plumbing</a>
+        <a href="https://flowify.nz/electrical.html">Electrical</a>
+        <a href="https://flowify.nz/landscaping.html">Landscaping &amp; Lawn Care</a>
+        <a href="https://flowify.nz/home-services.html">Home Services (Solo &amp; Micro)</a>
+      </div>
+      <div class="footer-col">
+        <span class="eyebrow on-dark">Get started</span>
+        <a href="https://flowify.nz/#paths">Choose your path</a>
+        <a href="https://flowify.nz/book.html">Book Your Free Trade Audit</a>
+      </div>
+    </div>
+    <div class="footer-bottom">FLOWIFY NZ — AUCKLAND — DONE-FOR-YOU JOB MANAGEMENT &amp; AI INTAKE FOR NZ TRADES</div>
+  </div>
+</footer>
+
+</body>
+</html>
